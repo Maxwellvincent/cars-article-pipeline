@@ -1,5 +1,8 @@
 venv/
 __pycache__/
 *.pyc
-*.log
+.env
+data/refined_passages.json
+data/practice_refined.json
 data/articles.json
+
