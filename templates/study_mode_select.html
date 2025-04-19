@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block content %}
+<h3>Choose Feedback Mode</h3>
+<form method="post">
+  <div class="form-check">
+    <input class="form-check-input" type="radio" name="mode" value="immediate" checked>
+    <label class="form-check-label">Show answer after each question</label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="radio" name="mode" value="review">
+    <label class="form-check-label">Review answers only after all questions</label>
+  </div>
+  <button class="btn btn-primary mt-3" type="submit">Start Studying</button>
+</form>
+{% endblock %}

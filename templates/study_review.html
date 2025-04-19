@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+{% block content %}
+<h2>Session Review</h2>
+
+{% for r in results %}
+<div class="card mb-4 {% if r.is_correct %}border-success{% else %}border-danger{% endif %}">
+  <div class="card-header">
+    <strong>{{ r.question_text }}</strong>
+  </div>
+  <div class="card-body">
+    <div class="mb-3">
+      {% for idx, para in r.full_passage|default([])|enumerate %}
+        <p {% if r.linked_paragraph and idx + 1 == r.linked_paragraph %} style="background-color: #fff8dc; border-left: 4px solid #ffc107;" {% endif %}>{{ para.text }}</p>
+      {% endfor %}
+    </div>
+
+    <ul>
+      {% for label, text in r.choices.items() %}
+      <li>
+        {{ label }}. {{ text }}
+        {% if label == r.correct_answer %} <strong>(Correct)</strong>{% endif %}
+        {% if label == r.selected %} <em>(Your choice)</em>{% endif %}
+        {% if r.trap_types and label in r.trap_types %} <span class="badge bg-warning text-dark">Trap: {{ r.trap_types[label] }}</span>{% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+
+    <p class="mt-2 {% if r.is_correct %}text-success{% else %}text-danger{% endif %}">
+      {% if r.is_correct %}✅ Correct{% else %}❌ Incorrect{% endif %}<br>
+      <small class="text-muted">{{ r.explanations[r.correct_answer] }}</small>
+    </p>
+
+    <p class="text-muted">
+      ⏱ Time Taken: {{ r.time_taken }} seconds<br>
+      💬 Confidence: 
+      <form method="post" action="/review/confidence/{{ loop.index0 }}">
+        <select name="confidence" class="form-select form-select-sm w-auto d-inline">
+          <option value="low" {% if r.confidence == 'low' %}selected{% endif %}>Low</option>
+          <option value="medium" {% if r.confidence == 'medium' %}selected{% endif %}>Medium</option>
+          <option value="high" {% if r.confidence == 'high' %}selected{% endif %}>High</option>
+        </select>
+        <button class="btn btn-sm btn-outline-primary">Save</button>
+      </form>
+    </p>
+  </div>
+</div>
+{% endfor %}
+
+<a href="/dashboard" class="btn btn-secondary">← Back to Dashboard</a>
+{% endblock %}

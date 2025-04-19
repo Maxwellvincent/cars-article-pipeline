@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header bg-light">
+        <strong>{{ question.passage_title }}</strong> ({{ question.passage_source }})
+      </div>
+      <div class="card-body">
+        {% for idx, para in enumerate(question.full_passage) %}
+          <p>{{ para.text }}</p>
+        {% endfor %}
+
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-body">
+        <form method="post">
+          <h5>{{ question.question_text }}</h5>
+          {% for label, text in question.choices.items() %}
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="answer" id="{{ label }}" value="{{ label }}"
+                   {% if selected == label %}checked{% endif %}>
+            <label class="form-check-label" for="{{ label }}">
+              {{ label }}. {{ text }}
+            </label>
+          </div>
+          {% endfor %}
+          <button type="submit" class="btn btn-primary mt-3">Submit</button>
+        </form>
+
+        {% if selected and mode == 'immediate' %}
+        <hr>
+        <p class="mt-3">
+          {% if selected == question.correct_answer %}
+          ✅ Correct!
+          {% else %}
+          ❌ Incorrect. The correct answer is <strong>{{ question.correct_answer }}</strong>.
+          {% endif %}
+        </p>
+        <small>{{ question.explanations[question.correct_answer] }}</small>
+        <a class="btn btn-success mt-2" href="/study/question/{{ index + 1 }}">Next Question</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

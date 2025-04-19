@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h2>Dashboard</h2>
+
+<div class="row">
+  {% for subject in subjects %}
+    <div class="col-md-4">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">{{ subject.name }}</h5>
+          <p class="card-text">Progress: {{ subject.progress }}</p>
+          <a href="/subject/{{ subject.id }}" class="btn btn-primary">Go to {{ subject.name }}</a>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+<hr>
+<h4>Quick Stats (CARS)</h4>
+<ul class="list-group">
+  {% for qtype, stats in profile.question_stats.items() %}
+    <li class="list-group-item">
+      {{ qtype }} – {{ stats.correct }}/{{ stats.attempts }} correct
+    </li>
+  {% endfor %}
+</ul>
+
+<a href="/study/start" class="btn btn-success mt-3">Start Studying Now</a>
+
+{% endblock %}

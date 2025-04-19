@@ -1,0 +1,48 @@
+{
+  "email": "louisvmaxwell@gmail.com",
+  "name": "L Max",
+  "question_stats": {},
+  "difficulty_stats": {
+    "1": {
+      "seen": 0,
+      "correct": 0
+    },
+    "2": {
+      "seen": 0,
+      "correct": 0
+    },
+    "3": {
+      "seen": 0,
+      "correct": 0
+    },
+    "4": {
+      "seen": 0,
+      "correct": 0
+    },
+    "5": {
+      "seen": 0,
+      "correct": 0
+    },
+    "6": {
+      "seen": 0,
+      "correct": 0
+    },
+    "7": {
+      "seen": 0,
+      "correct": 0
+    },
+    "8": {
+      "seen": 0,
+      "correct": 0
+    },
+    "9": {
+      "seen": 0,
+      "correct": 0
+    },
+    "10": {
+      "seen": 0,
+      "correct": 0
+    }
+  },
+  "recent_activity": []
+}

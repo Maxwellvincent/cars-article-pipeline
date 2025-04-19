@@ -1,0 +1,73 @@
+{
+  "question_stats": {
+    "inference": {
+      "attempts": 3,
+      "correct": 2
+    }
+  },
+  "difficulty_stats": {
+    "1": {
+      "seen": 0,
+      "correct": 0
+    },
+    "2": {
+      "seen": 0,
+      "correct": 0
+    },
+    "3": {
+      "seen": 3,
+      "correct": 2
+    },
+    "4": {
+      "seen": 0,
+      "correct": 0
+    },
+    "5": {
+      "seen": 0,
+      "correct": 0
+    },
+    "6": {
+      "seen": 0,
+      "correct": 0
+    },
+    "7": {
+      "seen": 0,
+      "correct": 0
+    },
+    "8": {
+      "seen": 0,
+      "correct": 0
+    },
+    "9": {
+      "seen": 0,
+      "correct": 0
+    },
+    "10": {
+      "seen": 0,
+      "correct": 0
+    }
+  },
+  "recent_activity": [
+    {
+      "question_id": "p002_q2",
+      "question_type": "inference",
+      "difficulty": 3,
+      "was_correct": true,
+      "timestamp": "2025-04-19T03:24:38.760484"
+    },
+    {
+      "question_id": "p002_q2",
+      "question_type": "inference",
+      "difficulty": 3,
+      "was_correct": false,
+      "timestamp": "2025-04-19T03:24:38.748475"
+    },
+    {
+      "question_id": "p001_q2",
+      "question_type": "inference",
+      "difficulty": 3,
+      "was_correct": true,
+      "timestamp": "2025-04-19T03:24:38.737365"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h2>Review: {{ passage_id }}</h2>
+
+{% if questions %}
+  {% for q in questions %}
+    <div class="card">
+      <div class="card-body">
+        <h5>{{ q.question_text }}</h5>
+        <ul class="list-group">
+          {% for label, choice in q.choices.items() %}
+            <li class="list-group-item {% if label == q.correct_answer %}list-group-item-success{% endif %}">
+              <strong>{{ label }}.</strong> {{ choice }}<br>
+              <small class="text-muted">{{ q.explanations[label] }}</small>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  {% endfor %}
+{% else %}
+  <div class="alert alert-warning">No reviewed questions yet.</div>
+{% endif %}
+
+<a href="/dashboard" class="btn btn-secondary mt-3">← Back to Dashboard</a>
+
+{% endblock %}
