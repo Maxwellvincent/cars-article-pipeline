@@ -27,6 +27,24 @@
   {% endfor %}
 </ul>
 
+<h4>Performance by Topic</h4>
+<ul class="list-group mb-3">
+  {% for topic, stats in topic_perf.items() %}
+    <li class="list-group-item d-flex justify-content-between">
+      {{ topic.title() }} <span>{{ stats.correct }}/{{ stats.seen }} correct ({{ (stats.correct / stats.seen * 100) | round(1) }}%)</span>
+    </li>
+  {% endfor %}
+</ul>
+
+<h4>Performance by Style</h4>
+<ul class="list-group">
+  {% for style, stats in style_perf.items() %}
+    <li class="list-group-item d-flex justify-content-between">
+      {{ style.title() }} <span>{{ stats.correct }}/{{ stats.seen }} correct ({{ (stats.correct / stats.seen * 100) | round(1) }}%)</span>
+    </li>
+  {% endfor %}
+</ul>
+
 <a href="/study/start" class="btn btn-success mt-3">Start Studying Now</a>
 
 {% endblock %}

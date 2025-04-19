@@ -52,8 +52,12 @@ def dashboard():
         {"id": "cars", "name": "CARS", "progress": "82%"},
         {"id": "bio", "name": "Biology", "progress": "41%"}
     ]
+    log_path = USER_DIR / user_id / "user_logs.jsonl"
+    passage_file = "training-data/passages.jsonl"
+    topic_perf, style_perf = compute_topic_style_performance(log_path, passage_file)
 
-    return render_template("dashboard.html", user=user, profile=profile, subjects=subjects)
+    return render_template("dashboard.html", user=user, profile=profile, subjects=subjects,topic_perf=topic_perf, style_perf=style_perf)
+
 
 @app.route("/review/<passage_id>")
 def review_passage(passage_id):
@@ -241,6 +245,42 @@ def study_question(index):
         index=index,
         mode=mode
     )
+
+## HELPER TO COMPUTE ACCURACY By TOPIC and STYLE
+def compute_topic_style_performance(log_path, passage_file):
+    if not os.path.exists(log_path) or not os.path.exists(passage_file):
+        return {}, {}
+
+    with open(log_path, "r") as f:
+        logs = [json.loads(line.strip()) for line in f if line.strip()]
+    with open(passage_file, "r") as f:
+        passages = {json.loads(line)["passage_id"]: json.loads(line) for line in f}
+
+    topic_stats = {}
+    style_stats = {}
+
+    for log in logs:
+        pid = log["question_id"].split("_")[0]
+        passage = passages.get(pid)
+        if not passage:
+            continue
+
+        topic = passage.get("topic", "unknown")
+        style = passage.get("style", "unknown")
+
+        def update_stats(container, key, correct):
+            if key not in container:
+                container[key] = {"seen": 0, "correct": 0}
+            container[key]["seen"] += 1
+            if correct:
+                container[key]["correct"] += 1
+
+        update_stats(topic_stats, topic, log["was_correct"])
+        update_stats(style_stats, style, log["was_correct"])
+
+    return topic_stats, style_stats
+
+
 
 
 @app.route("/subject/<subject_id>")
